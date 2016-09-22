@@ -2,8 +2,15 @@ language: ruby
 rvm:
 - 2.2.5
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp config/database.yml.travis config/database.yml
-  - bin/rake db:migrate RAILS_ENV=test
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- bin/rake db:migrate RAILS_ENV=test
+deploy:
+  provider: heroku
+  api_key:
+    secure: PKyaKRX2Ps0cvcKTGz3UfvcGdIGkVjuaSQufYZNxCqY834NJLfqUQdV4edcitXPP5ZIs05Pv+tjActvJ53X+wI610XHJ3AT3WYTAJMQj1q8ZdHqTdgfsQBz8oUSQXh9dwtgURi8qM9TgLkMri8xHZDFss88IHOZous6rniSHJDAfkhFyYHJZ9cQNf+4oTpCXUth3Q4uRACtFbLMvPnTiwiNpveE3jgySTspB4dn4nIYZ0bkzYNhaSZbgqKbUjb9ZEWtytPDEuw3aG+OubCu1yMTsyX2MtFPuULti2yRAVdp1LSdEGW8LHGtRdrSYgIC1PXgG9/ZBF9kt3kmzzpsyYpyJVsMbBCbAXp5/O4cN/LxM1h0XH9VrSKSM5KGSR+Zm4IwRES0FqWNzbXzNg63VGSW6sxk2MmuOJWHLjYJBQypigtZXmKxlCS3LEI5dKI9KnTvV3ogDGxvK27qX61rG4od7uPu/bnvUnfpKi6P+TDtJtuz8Leb2bDqV01LyZcysOtqrpUgpp754rprIDhLPY0/oZcQnpK+MNp8GWt7jkHRdscmuV4hn48WswUIIHI/XkScVtx2ESF9JOgeKoioQLBQD1bh6LkwtZlEY41ikVFFcZC7K5+IM9OvvEkpXbVlSxLksp3b4MRW++SukaXT9Li2NFv0syYLJ7zUdSWeBMPE=
+  app: hidden-citadel-98739
+  on:
+    repo: Akio-m/rails_enpit
